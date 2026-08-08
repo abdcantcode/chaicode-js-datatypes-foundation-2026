@@ -46,17 +46,32 @@
  *   updatePrices({meetha:30, saada:20}, 10)              // => {meetha:40, saada:30}
  */
 export function createPaanOrder(basePaan, customizations) {
-  // Your code here
+  if(basePaan===null||typeof basePaan!=='object'||Array.isArray(basePaan)) return {};
+  if(customizations===null||typeof customizations!=='object'||Array.isArray(customizations)) return Object.assign({},basePaan);
+  return Object.assign({},basePaan,customizations);
 }
 
 export function freezeMenu(menu) {
-  // Your code here
+   if(menu===null||typeof menu!=='object'||Array.isArray(menu)) return {};
+   return Object.freeze(menu);
 }
 
 export function updatePrices(menu, increase) {
-  // Your code here
+
+   if(menu===null||typeof menu!=='object'||Array.isArray(menu)||Number.isNaN(increase)||typeof increase!=='number') return {};
+  //  menu=Object.entries(menu)
+  //  for(let i=0;i<menu.length;i++){
+  //   menu[i][1]+=increase;
+  //  }
+  //  menu=Object.fromEntries(menu);
+  //  return menu; This was my first approach//
+  return Object.fromEntries(Object.entries(menu).map(([key,value])=>[key,value+increase]));
 }
 
 export function mergeDailySpecials(regularMenu, specialsMenu) {
-  // Your code here
+ if(regularMenu===null||typeof regularMenu!=='object'||Array.isArray(regularMenu)){
+  regularMenu={};
+ }if(specialsMenu===null||typeof specialsMenu!=='object'||Array.isArray(specialsMenu)) specialsMenu={};
+ return {...regularMenu,...specialsMenu};
+
 }
