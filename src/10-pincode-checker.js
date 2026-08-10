@@ -59,20 +59,33 @@
  */
 export function getDataType(value) {
   // Your code here
+  /**   1. getDataType(value)
+ *      - typeof use karo, LEKIN special cases handle karo:
+ *        - typeof null === "object" (JS ka famous bug!) → return "null"
+ *        - typeof [] === "object" (Array bhi object hai) → return "array"
+ *        - Baaki sab ke liye typeof ki value return karo
+ *      - Example: getDataType(42) => "number"
+ *      - Example: getDataType("hello") => "string"
+ *      - Example: getDataType(null) => "null"
+ *      - Example: getDataType([1,2]) => "array" */
+  if(value===null && typeof value==='object') return 'null';
+  if(Array.isArray(value) && typeof value==='object') return 'array';
+  return typeof value; 
 }
 
 export function isValidParcelWeight(weight) {
-  // Your code here
+  if(Number.isFinite(weight)&&weight>0) return true;
+  return false;
 }
 
 export function isWholeNumber(value) {
-  // Your code here
+  return Number.isInteger(value);
 }
 
 export function isNotANumber(value) {
-  // Your code here
+  return Number.isNaN(value);
 }
 
 export function isTruthy(value) {
-  // Your code here
+  return Boolean(value);
 }
